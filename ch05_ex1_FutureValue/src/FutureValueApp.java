@@ -23,22 +23,11 @@ public class FutureValueApp {
             double futureValue = calculateFutureValue(
                     monthlyInvestment, interestRate, years);
 
-            // get the currency and percent formatters
-            NumberFormat c = NumberFormat.getCurrencyInstance();
-            NumberFormat p = NumberFormat.getPercentInstance();
-            p.setMinimumFractionDigits(1);
+            // call printFormattedResults()
+            printFormattedResults(monthlyInvestment, interestRate, years, futureValue);
 
-            // print the results
-            System.out.println("FORMATTED RESULTS\n" 
-              + "Monthly investment:   " + c.format(monthlyInvestment) + "\n"
-              + "Yearly interest rate: " + p.format(interestRate / 100) + "\n"
-              + "Number of years:      " + years + "\n"
-              + "Future value:         " + c.format(futureValue) + "\n");
-
-            // see if the user wants to continue
-            System.out.print("Continue? (y/n): ");
-            choice = sc.nextLine();
-            System.out.println();
+            // call askToContinue()
+            choice = askToContinue(sc);
         }
     }
     
@@ -103,5 +92,26 @@ public class FutureValueApp {
                           (1 + monthlyInterestRate);
         }
         return futureValue;
+    }
+
+    public static double printFormattedResults(double monthlyInvestment, double interestRate, int years, double futureValue) {
+        // get the currency and percent formatters
+            NumberFormat c = NumberFormat.getCurrencyInstance();
+            NumberFormat p = NumberFormat.getPercentInstance();
+            p.setMinimumFractionDigits(1);
+        System.out.println("FORMATTED RESULTS\n" 
+          + "Monthly investment:   " + c.format(monthlyInvestment) + "\n"
+          + "Yearly interest rate: " + p.format(interestRate / 100) + "\n"
+          + "Number of years:      " + years + "\n"
+          + "Future value:         " + c.format(futureValue) + "\n");
+
+        return futureValue;
+    }
+
+    public static String askToContinue(Scanner sc) {
+        System.out.print("Continue? (y/n): ");
+            String choice = sc.nextLine();
+            System.out.println();
+        return choice;
     }
 }
